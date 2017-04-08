@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <ImageView
+        android:id="@+id/ivTaskPrirority"
+        android:layout_width="@dimen/imageSize"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true" />
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"><RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:id="@+id/tvTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/imageSize"
+        android:textColor="@color/text"
+        android:textSize="@dimen/taskTitleSize" />
+
+    <TextView
+        android:id="@+id/tvTaskContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTaskTitle"
+        android:layout_marginLeft="@dimen/imageSize"
+        android:textColor="@color/text"
+        android:textSize="@dimen/taskContentSize" />
+</RelativeLayout></ScrollView>
+</RelativeLayout>
