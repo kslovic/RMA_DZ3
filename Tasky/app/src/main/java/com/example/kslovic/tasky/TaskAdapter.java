@@ -34,17 +34,17 @@ public class TaskAdapter extends BaseAdapter {
         }
         Task task = this.Tasks.get(position);
         taskViewHolder.tvTaskTitle.setText(task.gettTitle());
-        taskViewHolder.tvTaskContent.setText(task.gettContent());
+        taskViewHolder.tvTaskCategory.setText(task.gettContent());
         taskViewHolder.ivTaskPriority.setBackgroundColor(task.gettPriority());;
         return convertView;
     }
 
     public static class ViewHolder {
-        public TextView tvTaskTitle, tvTaskContent;
+        public TextView tvTaskTitle, tvTaskCategory;
         ImageView ivTaskPriority;
         public ViewHolder(View itemView) {
             this.tvTaskTitle = (TextView) itemView.findViewById(R.id.tvTaskTitle);
-            this.tvTaskContent = (TextView) itemView.findViewById(R.id.tvTaskContent);
+            this.tvTaskCategory = (TextView) itemView.findViewById(R.id.tvTaskCategory);
             this.ivTaskPriority = (ImageView) itemView.findViewById(R.id.ivTaskPrirority);
         }
 

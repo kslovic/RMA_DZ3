@@ -18,7 +18,7 @@ import static android.content.ContentValues.TAG;
 public class ListActivity extends Activity implements View.OnClickListener {
     ListView lvTasksList;
     TaskAdapter tAdapter;
-    Button bAdd;
+    Button bAddTask;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +29,9 @@ public class ListActivity extends Activity implements View.OnClickListener {
         this.lvTasksList = (ListView) this.findViewById(R.id.lvTaskList);
         this.tAdapter = new TaskAdapter(this.loadTasks());
         this.lvTasksList.setAdapter(this.tAdapter);
-        this.bAdd=(Button) findViewById(R.id.bAdd);
+        this.bAddTask=(Button) findViewById(R.id.bAddTask);
 
-        bAdd.setOnClickListener(this);
+        bAddTask.setOnClickListener(this);
         this.lvTasksList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
@@ -40,6 +40,23 @@ public class ListActivity extends Activity implements View.OnClickListener {
                 return true;
             }
         });
+        Intent startingIntent = this.getIntent();
+        if(startingIntent.hasExtra(NewTaskActivity.TITLE)&&startingIntent.hasExtra(NewTaskActivity.CATEGORY)&&startingIntent.hasExtra(NewTaskActivity.PRIORITY)){
+            String title = startingIntent.getStringExtra(NewTaskActivity.TITLE);
+            String category = startingIntent.getStringExtra(NewTaskActivity.CATEGORY);
+            String priority = startingIntent.getStringExtra(NewTaskActivity.PRIORITY);
+            int tColor= Color.GREEN;
+            Log.d(TAG,priority);
+            switch(priority){
+                case "Medium":
+                    tColor = Color.YELLOW;
+                    break;
+                case "High":
+                    tColor = Color.RED;
+                    break;
+            }
+            tAdapter.add(new Task(title,category, tColor));
+        }
     }
     private ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();

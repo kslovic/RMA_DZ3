@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:id="@+id/bAdd"
+        android:id="@+id/bAddTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add"/>
     <ListView
         android:id="@+id/lvTaskList"
-        android:layout_below="@+id/bAdd"
+        android:layout_below="@+id/bAddTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

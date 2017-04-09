@@ -10,7 +10,6 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-
         />
     <TextView
         android:id="@+id/tvTaskTitle"
@@ -22,12 +21,12 @@
 />
 
     <TextView
-        android:id="@+id/tvTaskContent"
+        android:id="@+id/tvTaskCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTaskTitle"
         android:layout_toRightOf="@+id/ivTaskPrirority"
         android:textColor="@color/text"
-        android:textSize="@dimen/taskContentSize"
+        android:textSize="@dimen/taskCategorySize"
         />
 </RelativeLayout>
