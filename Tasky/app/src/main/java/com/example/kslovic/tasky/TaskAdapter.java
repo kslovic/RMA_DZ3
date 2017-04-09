@@ -1,5 +1,6 @@
 package com.example.kslovic.tasky;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class TaskAdapter extends BaseAdapter {
-    ArrayList<Task> Tasks;
+    private static final String TAG = "Kristina";
+    private ArrayList<Task> Tasks;
     public TaskAdapter(ArrayList<Task> tasks) { Tasks = tasks; }
     @Override
     public int getCount() { return this.Tasks.size(); }
@@ -47,6 +49,15 @@ public class TaskAdapter extends BaseAdapter {
         }
 
 
+    }
+    public void add(Task task) {
+        Tasks.add(task);
+        notifyDataSetChanged();
+    }
+    public void deleteAt(int position) {
+        Log.d(TAG,"deleted");
+        Tasks.remove(position);
+        notifyDataSetChanged();
     }
 
 }

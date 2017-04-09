@@ -3,15 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/bAdd"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add"/>
-    <ListView
-        android:id="@+id/lvTaskList"
-        android:layout_below="@+id/bAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
 </RelativeLayout>
