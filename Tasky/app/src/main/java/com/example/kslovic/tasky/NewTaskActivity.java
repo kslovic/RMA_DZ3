@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +81,7 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
         this.bAddNewCategory.setOnClickListener(this);
 
         ArrayList<String> listOldCategories = new ArrayList<String>(
-                Arrays.asList("faculty", "shopping", "work", "other"));
+                Arrays.asList("Faculty", "Shopping", "Work", "Other"));
         if (null != this.mPrefs) {
             Set<String> set;
             set = this.mPrefs.retrieveCategory(this);
@@ -117,8 +118,12 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
                 tTitle = etNewTask.getText().toString();
                 tCategory = sCategory.getSelectedItem().toString();
                 tPriority = sPriority.getSelectedItem().toString();
-                    int tColor= Color.GREEN;
-                    switch(tPriority){
+                if(tTitle.isEmpty()){
+                    Toast.makeText(this, "You must enter task name!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    int tColor = Color.GREEN;
+                    switch (tPriority) {
                         case "Medium":
                             tColor = Color.YELLOW;
                             break;
@@ -126,24 +131,29 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
                             tColor = Color.RED;
                             break;
                     }
-                    Task task = new Task(tTitle,tCategory, tColor);
+                    Task task = new Task(tTitle, tCategory, tColor);
                     TaskDBHelper.getInstance(getApplicationContext()).insertTask(task);
-                    Intent explicitIntent = new Intent(getApplicationContext(),ListActivity.class);
+                    Intent explicitIntent = new Intent(getApplicationContext(), ListActivity.class);
                     this.startActivity(explicitIntent);
+                }
                 break;
             case R.id.bAddNewCategory:
                 tCategory = etNewCategory.getText().toString();
-                
-                if (null != this.mPrefs) {
-                    Set<String> setCategory;
-                    setCategory = this.mPrefs.retrieveCategory(this);
-                    List<String> listSet = new ArrayList<String>(setCategory);
-                    listSet.add(tCategory);
-                    setCategory = new HashSet<String>(listSet);
-                    mPrefs.saveCategory(getApplicationContext(),setCategory);
+                if(tCategory.isEmpty()){
+                    Toast.makeText(this, "You must enter category name!", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(getApplicationContext(),ListActivity.class);
-                this.startActivity(intent);
+                else {
+                    if (null != this.mPrefs) {
+                        Set<String> setCategory;
+                        setCategory = this.mPrefs.retrieveCategory(this);
+                        List<String> listSet = new ArrayList<String>(setCategory);
+                        listSet.add(tCategory);
+                        setCategory = new HashSet<String>(listSet);
+                        mPrefs.saveCategory(getApplicationContext(), setCategory);
+                    }
+                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                    this.startActivity(intent);
+                }
                 break;
         }
         }

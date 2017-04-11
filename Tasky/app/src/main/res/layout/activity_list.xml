@@ -2,18 +2,31 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+    <ImageView
+        android:id="@+id/backg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/background" />
     <Button
         android:id="@+id/bAddTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add"/>
+        android:text="@string/add"
+        android:background="@color/bAdd"
+        android:textColor="@color/text"
+        android:layout_margin="@dimen/taskPadding"/>
     <Button
         android:id="@+id/bAddCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bAddTask"
-        android:text="@string/addCategory"/>
+        android:text="@string/addCategory"
+        android:background="@color/bAdd"
+        android:textColor="@color/text"
+        android:layout_margin="@dimen/taskPadding"/>
     <ListView
         android:id="@+id/lvTaskList"
         android:layout_below="@+id/bAddCategory"

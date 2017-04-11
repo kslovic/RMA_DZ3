@@ -2,6 +2,8 @@
     <string name="app_name">Tasky</string>
     <string name="add">Add new task</string>
     <string name="addCategory">Add new category</string>
+    <string name="categoryHint">Enter category name...</string>
+    <string name="titleHint">Enter task name...</string>
     <string-array name="priority_array">
         <item>Low</item>
         <item>Medium</item>

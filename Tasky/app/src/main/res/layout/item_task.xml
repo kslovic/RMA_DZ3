@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="@dimen/taskPadding"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
     <ImageView
         android:id="@+id/ivTaskPrirority"
         android:layout_width="@dimen/imageSize"

@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     >
     <LinearLayout
         android:id="@+id/llNewTask"
@@ -16,11 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add"
-            android:textSize="@dimen/taskTitleSize"/>
+            android:textSize="@dimen/taskTitleSize"
+            android:shadowColor="@color/bAdd"/>
         <EditText
             android:id="@+id/etNewTask"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="@string/titleHint"/>
         <Spinner
             android:id="@+id/sPriority"
             android:layout_width="match_parent"
@@ -34,7 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/add"
-            android:textSize="@dimen/taskTitleSize"/>
+            android:textSize="@dimen/taskTitleSize"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/llNewCategory"
@@ -46,16 +51,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/addCategory"
-            android:textSize="@dimen/taskTitleSize"/>
+            android:textSize="@dimen/taskTitleSize"
+            android:shadowColor="@color/bAdd"
+            />
         <EditText
             android:id="@+id/etNewCategory"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="@string/categoryHint"/>
         <Button
             android:id="@+id/bAddNewCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/addCategory"
-            android:textSize="@dimen/taskTitleSize"/>
+            android:textSize="@dimen/taskTitleSize"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimary"/>
     </LinearLayout>
 </LinearLayout>
