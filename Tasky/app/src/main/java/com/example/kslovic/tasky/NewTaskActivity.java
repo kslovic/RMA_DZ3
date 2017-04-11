@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,7 @@ import static android.content.ContentValues.TAG;
 public class NewTaskActivity extends Activity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     public static final String TAG = "Kristina";
+    private PreferenceManagement mPrefs;
     LinearLayout llNewTask;
     TextView tvNewTask;
     EditText etNewTask;
@@ -38,6 +41,7 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
     TextView tvNewCategory;
     EditText etNewCategory;
     Button bAddNewCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,7 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
     }
 
     private void setUI() {
+        this.mPrefs = new PreferenceManagement();
         this.llNewTask = (LinearLayout) findViewById(R.id.llNewTask);
         this.tvNewTask = (TextView) findViewById(R.id.tvNewTask);
         this.etNewTask = (EditText) findViewById(R.id.etNewTask);
@@ -58,12 +63,12 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
         this.bAddNewCategory = (Button) findViewById(R.id.bAddNewCategory);
 
         Intent startingIntent = this.getIntent();
-        if(startingIntent.hasExtra(ListActivity.VALUE)) {
+        if (startingIntent.hasExtra(ListActivity.VALUE)) {
             String value = startingIntent.getStringExtra(ListActivity.VALUE);
-            Log.d(TAG,value);
+            Log.d(TAG, value);
             switch (value) {
                 case "task":
-                    Log.d(TAG,"uslo");
+                    Log.d(TAG, "uslo");
                     llNewTask.setVisibility(View.VISIBLE);
                     break;
                 case "category":
@@ -76,7 +81,15 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
 
         ArrayList<String> listOldCategories = new ArrayList<String>(
                 Arrays.asList("faculty", "shopping", "work", "other"));
-        ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listOldCategories);
+        if (null != this.mPrefs) {
+            Set<String> set;
+            set = this.mPrefs.retrieveCategory(this);
+            List<String> listNew = new ArrayList<String>(set);
+            Set<String> newSet = new HashSet<String>(listOldCategories);
+            newSet.addAll(listNew);
+            listOldCategories = new ArrayList<String>(newSet);
+        }
+        ArrayAdapter<String> adapterCategory = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listOldCategories);
         adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sCategory.setAdapter(adapterCategory);
         ArrayAdapter<CharSequence> adapterPriority = ArrayAdapter.createFromResource(this, R.array.priority_array, android.R.layout.simple_spinner_item);
@@ -98,7 +111,7 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
 
     @Override
     public void onClick(View v) {
-        String tTitle, tCategory, tPriority;
+        String tTitle, tCategory="default", tPriority;
         switch(v.getId()){
             case R.id.bAddNewTask:
                 tTitle = etNewTask.getText().toString();
@@ -119,8 +132,16 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
                     this.startActivity(explicitIntent);
                 break;
             case R.id.bAddNewCategory:
-                tCategory = etNewTask.getText().toString();
-                //insert
+                tCategory = etNewCategory.getText().toString();
+                
+                if (null != this.mPrefs) {
+                    Set<String> setCategory;
+                    setCategory = this.mPrefs.retrieveCategory(this);
+                    List<String> listSet = new ArrayList<String>(setCategory);
+                    listSet.add(tCategory);
+                    setCategory = new HashSet<String>(listSet);
+                    mPrefs.saveCategory(getApplicationContext(),setCategory);
+                }
                 Intent intent = new Intent(getApplicationContext(),ListActivity.class);
                 this.startActivity(intent);
                 break;
