@@ -1,13 +1,12 @@
 package com.example.kslovic.tasky;
 
-
 public class Task {
-    private String tTitle, tContent;
+    private String tTitle, tCategory;
     int tPriority;
 
-    public Task(String tTitle, String tContent, int tPriority) {
+    public Task(String tTitle, String tCategory, int tPriority) {
         this.tTitle = tTitle;
-        this.tContent = tContent;
+        this.tCategory = tCategory;
         this.tPriority = tPriority;
     }
 
@@ -15,8 +14,8 @@ public class Task {
         return tTitle;
     }
 
-    public String gettContent() {
-        return tContent;
+    public String gettCategory() {
+        return tCategory;
     }
 
     public int gettPriority() {

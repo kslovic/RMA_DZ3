@@ -17,7 +17,7 @@ public class TaskAdapter extends BaseAdapter {
     @Override
     public int getCount() { return this.Tasks.size(); }
     @Override
-    public Object getItem(int position) { return this.Tasks.get(position); }
+    public Task getItem(int position) { return Tasks.get(position); }
     @Override
     public long getItemId(int position) { return position; }
     @Override
@@ -34,7 +34,7 @@ public class TaskAdapter extends BaseAdapter {
         }
         Task task = this.Tasks.get(position);
         taskViewHolder.tvTaskTitle.setText(task.gettTitle());
-        taskViewHolder.tvTaskCategory.setText(task.gettContent());
+        taskViewHolder.tvTaskCategory.setText(task.gettCategory());
         taskViewHolder.ivTaskPriority.setBackgroundColor(task.gettPriority());;
         return convertView;
     }

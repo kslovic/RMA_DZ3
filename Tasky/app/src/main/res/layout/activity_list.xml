@@ -8,9 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add"/>
+    <Button
+        android:id="@+id/bAddCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bAddTask"
+        android:text="@string/addCategory"/>
     <ListView
         android:id="@+id/lvTaskList"
-        android:layout_below="@+id/bAddTask"
+        android:layout_below="@+id/bAddCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>

@@ -16,9 +16,11 @@ import static android.content.ContentValues.TAG;
 
 
 public class ListActivity extends Activity implements View.OnClickListener {
+    public static final String VALUE = "value";
     ListView lvTasksList;
     TaskAdapter tAdapter;
     Button bAddTask;
+    Button bAddCategory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,45 +32,37 @@ public class ListActivity extends Activity implements View.OnClickListener {
         this.tAdapter = new TaskAdapter(this.loadTasks());
         this.lvTasksList.setAdapter(this.tAdapter);
         this.bAddTask=(Button) findViewById(R.id.bAddTask);
+        this.bAddCategory = (Button) findViewById(R.id.bAddCategory);
 
         bAddTask.setOnClickListener(this);
+        bAddCategory.setOnClickListener(this);
         this.lvTasksList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
             {    Log.d(TAG,"klik");
+                Task task = tAdapter.getItem(position);
+                TaskDBHelper.getInstance(getApplicationContext()).deleteTask(task);
                 tAdapter.deleteAt(position);
                 return true;
             }
         });
-        Intent startingIntent = this.getIntent();
-        if(startingIntent.hasExtra(NewTaskActivity.TITLE)&&startingIntent.hasExtra(NewTaskActivity.CATEGORY)&&startingIntent.hasExtra(NewTaskActivity.PRIORITY)){
-            String title = startingIntent.getStringExtra(NewTaskActivity.TITLE);
-            String category = startingIntent.getStringExtra(NewTaskActivity.CATEGORY);
-            String priority = startingIntent.getStringExtra(NewTaskActivity.PRIORITY);
-            int tColor= Color.GREEN;
-            Log.d(TAG,priority);
-            switch(priority){
-                case "Medium":
-                    tColor = Color.YELLOW;
-                    break;
-                case "High":
-                    tColor = Color.RED;
-                    break;
-            }
-            tAdapter.add(new Task(title,category, tColor));
-        }
+
     }
     private ArrayList<Task> loadTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(new Task("The Hobbit","J.R.R. Tolkien", Color.BLACK));
-        tasks.add(new Task("The fellowship of the ring","J.R.R. Tolkien", Color.BLACK));
-        return tasks;
+        return TaskDBHelper.getInstance(this).getAllTasks();
     }
 
     @Override
     public void onClick(View v) {
         Intent explicitIntent = new Intent(getApplicationContext(),NewTaskActivity.class);
+        switch(v.getId()){
+            case R.id.bAddTask:
+            explicitIntent.putExtra(VALUE, "task");
+                break;
+            case R.id.bAddCategory:
+                explicitIntent.putExtra(VALUE, "category");
+                break;
+        }
         this.startActivity(explicitIntent);
-
     }
 }
