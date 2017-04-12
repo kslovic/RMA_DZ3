@@ -50,6 +50,7 @@ public class ListActivity extends Activity implements View.OnClickListener {
     }
     private ArrayList<Task> loadTasks() {
         return TaskDBHelper.getInstance(this).getAllTasks();
+
     }
 
     @Override

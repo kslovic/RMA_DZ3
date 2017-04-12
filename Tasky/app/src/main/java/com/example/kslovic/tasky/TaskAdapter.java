@@ -50,10 +50,6 @@ public class TaskAdapter extends BaseAdapter {
 
 
     }
-    public void add(Task task) {
-        Tasks.add(task);
-        notifyDataSetChanged();
-    }
     public void deleteAt(int position) {
         Log.d(TAG,"deleted");
         Tasks.remove(position);

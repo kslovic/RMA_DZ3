@@ -112,7 +112,7 @@ public class NewTaskActivity extends Activity implements AdapterView.OnItemSelec
 
     @Override
     public void onClick(View v) {
-        String tTitle, tCategory="default", tPriority;
+        String tTitle, tCategory, tPriority;
         switch(v.getId()){
             case R.id.bAddNewTask:
                 tTitle = etNewTask.getText().toString();
